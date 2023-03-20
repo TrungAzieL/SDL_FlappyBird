@@ -3,6 +3,7 @@
 #include "Object_bird.hpp"
 #include "Object_pole.hpp"
 #include "Object_road.hpp"
+#include "Collider.hpp"
 
 Object background;
 Object_road road[2];
@@ -78,6 +79,12 @@ void Game::update() {
 	bird.Update();
 	
 	for (int i = 0; i < 6; ++i) {
+		SDL_Rect* poleShape[4] = { pole_body[i].getShape(), pole_head[i].getShape() , pole_body__rev[i].getShape() , pole_head__rev[i].getShape() };
+
+		if (bird.checkCollider(poleShape)) {
+			system("cls");
+			printf("Collider! %d\n", i);                    
+		}
 		pole_body[i].Update();
 		pole_head[i].Update();
 

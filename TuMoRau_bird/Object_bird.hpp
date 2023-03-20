@@ -1,5 +1,6 @@
 #pragma once
 #include "Object.hpp"
+#include "Collider.hpp"
 
 class Object_bird : public Object {
 public:
@@ -25,6 +26,15 @@ public:
 		destRect.y = ypos;
 	}
 
+	bool checkCollider(SDL_Rect *pole[4]) {
+		for (int i = 0; i < 4; ++i) {
+			SDL_Rect* result = new SDL_Rect();
+			if (SDL_IntersectRect(&destRect, pole[i], result))
+				return true;
+		}
+		return false;
+	}
+
 	bool checkJump() {
 		if (Game::event.type == SDL_KEYDOWN) {
 			if (Game::event.key.keysym.sym == SDLK_SPACE) {
@@ -38,6 +48,7 @@ public:
 	}
 
 	void Update() override {
+
 		animation++;
 		if (animation > 5) {
 			srcRect.x += 32;

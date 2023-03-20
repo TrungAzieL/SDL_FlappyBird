@@ -30,6 +30,10 @@ public:
 		return resetX;
 	}
 
+	SDL_Rect* getShape() {
+		return &destRect;
+	}
+
 
 private:
 	const int diffHeight = 200;
